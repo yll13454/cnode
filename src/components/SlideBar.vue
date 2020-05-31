@@ -160,6 +160,8 @@ export default {
   }
   .linkclass {
     font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     a {
       color: rgb(161, 128, 165);
     }

@@ -1,6 +1,8 @@
 <template>
     <div class="postlist">
-        <div class="loading"> </div>
+        <!-- <div class="loading" v-if="isLoading">
+            <img src="@/assets/loading.gif" alt="" srcset="">
+        </div> -->
         <ul class="post">
             <li>
                 <ul class="toobar">
@@ -47,10 +49,7 @@ import pagination from '@/components/Pagination'
 export default {
   data() {
     return {
-      loading: {
-        type: Boolean,
-        default: false
-      },
+      isLoading: false,
       posts: [],
       postpage: 1
     }
@@ -60,6 +59,7 @@ export default {
   },
   methods: {
     getData() {
+        this.isLoading = true
       this.$http
         .get('https://cnodejs.org/api/v1/topics', {
           params: {
@@ -69,6 +69,7 @@ export default {
         })
         .then(res => {
           this.posts = res.data.data
+          this.isLoading = false
         })
         .catch(err => {
           console.log(err)
@@ -183,5 +184,10 @@ export default {
       vertical-align: middle;
     }
   }
+}
+.loading {
+  text-align: center;
+  padding-top: 300px;
+  z-index: 1;
 }
 </style>
